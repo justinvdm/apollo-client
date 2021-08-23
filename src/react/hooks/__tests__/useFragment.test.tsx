@@ -242,7 +242,48 @@ describe("useFragment", () => {
       "item 4",
     ]);
 
-    expect(cache.extract()).toMatchSnapshot();
+    expect(cache.extract()).toEqual({
+      "Item:1": {
+        __typename: "Item",
+        id: 1,
+      },
+      "Item:2": {
+        __typename: "Item",
+        id: 2,
+        text: "Item #2 updated",
+      },
+      "Item:3": {
+        __typename: "Item",
+        id: 3,
+        text: "Item #3 from cache.modify",
+      },
+      "Item:4": {
+        __typename: "Item",
+        id: 4,
+        text: "Item #4 updated",
+      },
+      "Item:5": {
+        __typename: "Item",
+        id: 5,
+      },
+      ROOT_QUERY: {
+        __typename: "Query",
+        list: [
+          { __ref: "Item:1" },
+          { __ref: "Item:2" },
+          { __ref: "Item:3" },
+          { __ref: "Item:4" },
+          { __ref: "Item:5" },
+        ],
+      },
+      __META: {
+        extraRootIds: [
+          "Item:2",
+          "Item:3",
+          "Item:4",
+        ],
+      },
+    });
   });
 
   it("List can use useFragment with ListFragment", async () => {
@@ -454,6 +495,46 @@ describe("useFragment", () => {
       "item 4",
     ]);
 
-    expect(cache.extract()).toMatchSnapshot();
+    expect(cache.extract()).toEqual({
+      "Item:1": {
+        __typename: "Item",
+        id: 1,
+      },
+      "Item:2": {
+        __typename: "Item",
+        id: 2,
+        text: "Item #2 updated",
+      },
+      "Item:3": {
+        __typename: "Item",
+        id: 3,
+      },
+      "Item:4": {
+        __typename: "Item",
+        id: 4,
+        text: "Item #4 updated",
+      },
+      "Item:5": {
+        __typename: "Item",
+        id: 5,
+      },
+      ROOT_QUERY: {
+        __typename: "Query",
+        list: [
+          { __ref: "Item:1" },
+          { __ref: "Item:2" },
+          { __ref: "Item:3" },
+          { __ref: "Item:4" },
+          { __ref: "Item:5" },
+        ],
+      },
+      __META: {
+        extraRootIds: [
+          "Item:2",
+          "Item:3",
+          "Item:4",
+        ],
+      },
+    });
   });
 });
